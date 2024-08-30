@@ -160,20 +160,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  document.addEventListener('touchstart', (event) => {
+    startX = event.touches[0].pageX;
+    startY = event.touches[0].pageY;
+  });
+
   document.addEventListener('touchend', (e) => {
+    e.cancelable && e.preventDefault();
+
     endX = e.changedTouches[0].clientX;
     endY = e.changedTouches[0].clientY;
 
     let diffX = endX - startX;
     let diffY = endY - startY;
 
-    if (Math.abs(diffX) > Math.abs(diffY)) {
+    const threshold = 50;
+
+    if (Math.abs(diffX) > threshold) {
       if (diffX > 0) {
         moveRight();
       } else {
         moveLeft();
       }
-    } else {
+    } else if (Math.abs(diffY) > threshold) {
       if (diffY > 0) {
         moveDown();
       } else {
