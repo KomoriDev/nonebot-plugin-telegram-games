@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let score = 0;
   const boardSize = 4;
 
+  let startX, startY, endX, endY;
   let board = Array(boardSize * boardSize).fill(0);
 
   const tiles = document.querySelectorAll('.tile');
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tileElement.classList.add('new');
 
     tileElement.addEventListener('animationend', () => {
-        tileElement.classList.remove('new');
+      tileElement.classList.remove('new');
     });
   }
 
@@ -142,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
     handleMove();
   }
 
-
   document.addEventListener('keyup', (e) => {
     switch (e.key) {
       case 'ArrowLeft':
@@ -157,6 +157,28 @@ document.addEventListener('DOMContentLoaded', () => {
       case 'ArrowDown':
         moveDown();
         break;
+    }
+  });
+
+  document.addEventListener('touchend', (e) => {
+    endX = e.changedTouches[0].clientX;
+    endY = e.changedTouches[0].clientY;
+
+    let diffX = endX - startX;
+    let diffY = endY - startY;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX > 0) {
+        moveRight();
+      } else {
+        moveLeft();
+      }
+    } else {
+      if (diffY > 0) {
+        moveDown();
+      } else {
+        moveUp();
+      }
     }
   });
 
