@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('touchstart', (event) => {
     startX = event.touches[0].pageX;
     startY = event.touches[0].pageY;
-  });
+  }, false);
 
   document.addEventListener('touchend', (e) => {
     e.cancelable && e.preventDefault();
