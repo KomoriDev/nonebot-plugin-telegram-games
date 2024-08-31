@@ -75,4 +75,6 @@ async def _(bot: Bot, event: InlineQueryEvent):
 @on("inline").handle()
 async def _(bot: Bot, event: CallbackQueryEvent):
     if event.game_short_name:
-        await bot.answer_callback_query(event.id, text=f"{event.game_short_name} 启动")
+        await bot.answer_callback_query(
+            event.id, url="https://telegram.komoridevs.icu/2048/index.html"
+        )
